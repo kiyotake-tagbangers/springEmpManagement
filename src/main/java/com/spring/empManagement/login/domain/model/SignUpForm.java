@@ -13,27 +13,27 @@ import java.util.Date;
 @Data
 public class SignUpForm {
 
-    @NotBlank // 必須入力
-    @Email // メールアドレス形式
+    @NotBlank(message = "{require_check}") // 必須入力
+    @Email(message = "{email_check}") // メールアドレス形式
     private String userId;
 
-    @NotBlank
-    @Length(min = 4, max = 100) // 4~100桁
-    @Pattern(regexp = "^[a-zA-Z0-9]+$") // 半角英数字のみ
+    @NotBlank(message = "{require_check}")
+    @Length(min = 4, max = 100, message = "{length_check}") // 4~100桁
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "{pattern_check}") // 半角英数字のみ
     private String password;
 
-    @NotBlank
+    @NotBlank(message = "{require_check}")
     private String userName;
 
-    @NotNull // 必須入力
+    @NotNull(message = "{require_check}") // 必須入力
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date birthday;
 
-    @Min(20)
-    @Max(120)
+    @Min(value = 20, message = "{min_check}")
+    @Max(value = 120, message = "{max_check}")
     private int age;
 
-    @AssertFalse  // falseのみ可能
+    @AssertFalse(message = "{false_check}")  // falseのみ可能
     private boolean marriage;  // 結婚ステータス
 
 }

@@ -13,27 +13,27 @@ import java.util.Date;
 @Data
 public class SignUpForm {
 
-    @NotBlank(message = "{require_check}") // 必須入力
-    @Email(message = "{email_check}") // メールアドレス形式
+    @NotBlank(groups = ValidGroup1.class, message = "{require_check}") // 必須入力
+    @Email(groups = ValidGroup2.class, message = "{email_check}") // メールアドレス形式
     private String userId;
 
-    @NotBlank(message = "{require_check}")
-    @Length(min = 4, max = 100, message = "{length_check}") // 4~100桁
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "{pattern_check}") // 半角英数字のみ
+    @NotBlank(groups = ValidGroup1.class, message = "{require_check}")
+    @Length(min = 4, max = 100, groups = ValidGroup2.class, message = "{length_check}") // 4~100桁
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", groups = ValidGroup3.class, message = "{pattern_check}") // 半角英数字のみ
     private String password;
 
-    @NotBlank(message = "{require_check}")
+    @NotBlank(groups = ValidGroup1.class, message = "{require_check}")
     private String userName;
 
-    @NotNull(message = "{require_check}") // 必須入力
+    @NotNull(groups = ValidGroup1.class, message = "{require_check}") // 必須入力
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date birthday;
 
-    @Min(value = 20, message = "{min_check}")
-    @Max(value = 120, message = "{max_check}")
+    @Min(value = 20, groups = ValidGroup2.class, message = "{min_check}")
+    @Max(value = 120, groups = ValidGroup2.class, message = "{max_check}")
     private int age;
 
-    @AssertFalse(message = "{false_check}")  // falseのみ可能
+    @AssertFalse(groups = ValidGroup2.class, message = "{false_check}")  // falseのみ可能
     private boolean marriage;  // 結婚ステータス
 
 }

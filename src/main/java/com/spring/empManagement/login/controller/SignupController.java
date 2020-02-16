@@ -1,8 +1,11 @@
 package com.spring.empManagement.login.controller;
 
+import com.spring.empManagement.login.domain.model.SignUpForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.LinkedHashMap;
@@ -35,19 +38,23 @@ public class SignupController {
      * @return
      */
     @GetMapping("/signup")
-    public String getSignUp(Model model) {
+    public String getSignUp(@ModelAttribute SignUpForm form, Model model) {
 
 //      ラジオボタン初期化メソッドの呼び出し
         radioMarriage = initRadioMarriage();
 
         model.addAttribute("radioMarriage", radioMarriage);
-
         return "login/signup";
     }
 
 
     @PostMapping("/signup")
-    public String postSignUp(Model model) {
+    public String postSignUp(@ModelAttribute SignUpForm form, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return getSignUp(form, model);
+        }
+        System.out.println(form);
 
 //      遷移先のControllerクラスのメソッドが呼ばれる
 //      /login にGETメソッドでHTTPリクエストが送られる(LoginController の getLogin メソッドが呼び出される)

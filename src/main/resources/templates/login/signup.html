@@ -26,8 +26,13 @@
                 <tr>
                     <th class="active col-sm-3">User ID</th>
                     <td>
-                        <div class="form-group">
+                        <!-- CSSのclassを追加するため、 th:classappend属性を使う -->
+                        <!-- has-error はBootstrapのclassでテキストボックスの枠を赤くする -->
+                        <!-- エラーの場合は、 has-error のクラスを追加している -->
+                        <div class="form-group" th:classappend="${#fields.hasErrors('userId')} ? 'has-error'">
                             <input type="text" class="form-control" th:field="*{userId}" /></input>
+                            <!-- th:if属性がtrueのときのみ、タグの内容を表示する -->
+                            <span class="text-danger" th:if"${#fields.hasErrors('userId')}" th:errors="*{userId}">userId error</span>
                         </div>
                     </td>
                 </tr>
@@ -36,8 +41,9 @@
                 <tr>
                     <th class="active">Password</th>
                     <td>
-                        <div class="form-group">
+                        <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
                             <input type="text" class="form-control" th:field="*{password}" />
+                            <span class="text-danger" th:if"${#fields.hasErrors('password')}" th:errors="*{password}">password error</span>
                         </div>
                     </td>
                 </tr>
@@ -46,8 +52,9 @@
                 <tr>
                     <th class="active">User name</th>
                     <td>
-                        <div class="form-group">
+                        <div class="form-group" th:classappend="${#fields.hasErrors('userName')} ? 'has-error'">
                             <input type="text" class="form-control" th:field="*{userName}" />
+                            <span class="text-danger" th:if"${#fields.hasErrors('userName')}" th:errors="*{userName}">userName error</span>
                         </div>
                     </td>
                 </tr>
@@ -56,8 +63,9 @@
                 <tr>
                     <th class="active">Birthday</th>
                     <td>
-                        <div class="form-group">
+                        <div class="form-group" th:classappend="${#fields.hasErrors('birthday')} ? 'has-error'">
                             <input type="text" class="form-control" placeholder="yyyy/MM/dd" th:field="*{birthday}" />
+                            <span class="text-danger" th:if"${#fields.hasErrors('birthday')}" th:errors="*{birthday}">birthday error</span>
                         </div>
                     </td>
                 </tr>
@@ -66,8 +74,9 @@
                 <tr>
                     <th class="active">Age</th>
                     <td>
-                        <div class="form-group">
+                        <div class="form-group" th:classappend="${#fields.hasErrors('age')} ? 'has-error'">
                             <input type="text" class="form-control" th:field="*{age}">
+                            <span class="text-danger" th:if"${#fields.hasErrors('age')}" th:errors="*{age}">userId error</span>
                         </div>
                     </td>
                 </tr>
@@ -81,18 +90,20 @@
                                 <input type="radio" name="radioMarrige" th:text="${item.key}" th:value="${item.value}"
                                     th:field="*{marriage}">
                                 </input>
+                            <span class="text-danger" th:if"${#fields.hasErrors('marriage')}" th:errors="*{marriage}">marriage error</span>
                             </div>
                         </div>
                     </td>
                 </tr>
 
             </table>
-            <ul>
+
+            <!-- <ul>
                 <li th:each="error: ${#fields.detailedErrors()}">
                     <span th:text="${error.message}">Error message</span>
                 </li>
             </ul>
-            <button class="btn btn-primary" type="submit">User Register</button>
+            <button class="btn btn-primary" type="submit">User Register</button> -->
 
         </form>
     </div>
